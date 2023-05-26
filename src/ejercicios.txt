@@ -1,0 +1,252 @@
+function Drink({ name }) {
+  let leaf, Caffeine, age;
+  if (name === "tea") {
+    leaf = "leaf";
+    Caffeine = "15–70 mg/cup";
+    age = "4,000+ years";
+  } else {
+    leaf = "bean";
+    Caffeine = "80–185 mg/cup";
+    age = "1,000+ years";
+  }
+  return (
+    <section>
+      <ul>
+        <h1>{name}</h1>
+        <h1>Part of plant</h1>
+        <li>{leaf}</li>
+        <h1>Caffeine content</h1>
+        <li>{Caffeine}</li>
+        <h1>Age</h1>
+        <li>{age}</li>
+      </ul>
+    </section>
+  );
+}
+
+export default function DrinkList() {
+  return (
+    <div>
+  
+        <Drink name="tea" />
+     
+
+      <Drink name="coffee" />
+    </div>
+  );
+}
+______________________________________________________
+BUSCADOR CON FILTER
+import { useState } from "react";
+
+export function getImageUrl(person) {
+  return "https://i.imgur.com/" + person.imageId + "s.jpg";
+}
+export const people = [
+  {
+    id: 0, // Used in JSX as a key
+    name: "Creola Katherine Johnson",
+    profession: "mathematician",
+    accomplishment: "spaceflight calculations",
+    imageId: "MK3eW3A",
+  },
+  {
+    id: 1, // Used in JSX as a key
+    name: "Mario José Molina-Pasquel Henríquez",
+    profession: "chemist",
+    accomplishment: "discovery of Arctic ozone hole",
+    imageId: "mynHUSa",
+  },
+  {
+    id: 2, // Used in JSX as a key
+    name: "Mohammad Abdus Salam",
+    profession: "physicist",
+    accomplishment: "electromagnetism theory",
+    imageId: "bE7W1ji",
+  },
+  {
+    id: 3, // Used in JSX as a key
+    name: "Percy Lavon Julian",
+    profession: "chemist",
+    accomplishment:
+      "pioneering cortisone drugs, steroids and birth control pills",
+    imageId: "IOjWm71",
+  },
+  {
+    id: 4, // Used in JSX as a key
+    name: "Subrahmanyan Chandrasekhar",
+    profession: "astrophysicist",
+    accomplishment: "white dwarf star mass calculations",
+    imageId: "lrWQx8l",
+  },
+];
+
+export default function List() {
+  const [Cambio, setCambio] = useState("");
+  const chemists = Cambio
+    ? people.filter(
+        (person) => person.profession === Cambio || person.name === Cambio
+      )
+    : people;
+
+  console.log(Cambio);
+
+  const listItems = chemists.map((person) => (
+    <li key={person.id}>
+      <img src={getImageUrl(person)} alt={person.name} />
+      <p>
+        <b>{person.name}</b>
+        {" " + person.profession + " "}
+        known for {person.accomplishment}
+      </p>
+    </li>
+  ));
+  return (
+    <div>
+      <input
+        type="search"
+        value={Cambio}
+        onChange={(e) => {
+          setCambio(e.target.value);
+        }}
+      ></input>
+      <ul>{listItems}</ul>;
+    </div>
+  );
+}
+______________________________________________________
+LISTADO DE DOS PROFECIONES 
+export function getImageUrl(person) {
+  return (
+    'https://i.imgur.com/' +
+    person.imageId +
+    's.jpg'
+  );
+}
+export const people = [{
+  id: 0,
+  name: 'Creola Katherine Johnson',
+  profession: 'mathematician',
+  accomplishment: 'spaceflight calculations',
+  imageId: 'MK3eW3A'
+}, {
+  id: 1,
+  name: 'Mario José Molina-Pasquel Henríquez',
+  profession: 'chemist',
+  accomplishment: 'discovery of Arctic ozone hole',
+  imageId: 'mynHUSa'
+}, {
+  id: 2,
+  name: 'Mohammad Abdus Salam',
+  profession: 'physicist',
+  accomplishment: 'electromagnetism theory',
+  imageId: 'bE7W1ji'
+}, {
+  id: 3,
+  name: 'Percy Lavon Julian',
+  profession: 'chemist',
+  accomplishment: 'pioneering cortisone drugs, steroids and birth control pills',
+  imageId: 'IOjWm71'
+}, {
+  id: 4,
+  name: 'Subrahmanyan Chandrasekhar',
+  profession: 'astrophysicist',
+  accomplishment: 'white dwarf star mass calculations',
+  imageId: 'lrWQx8l'
+}];
+const Cambio= people.filter((persona)=> persona.profession === "chemist")
+const Cambio2= people.filter((persona)=> persona.profession !== "chemist")
+export default function List() {
+  const listItems =Cambio .map(person =>
+    <li key={person.id}>
+      <img
+        src={getImageUrl(person)}
+        alt={person.name}
+      />
+      <p>
+        <b>{person.name}:</b>
+        {' ' + person.profession + ' '}
+        known for {person.accomplishment}
+      </p>
+    </li>
+  );
+  const listItemss =Cambio2 .map(person =>
+    <li key={person.id}>
+      <img
+        src={getImageUrl(person)}
+        alt={person.name}
+      />
+      <p>
+        <b>{person.name}:</b>
+        {' ' + person.profession + ' '}
+        known for {person.accomplishment}
+      </p>
+    </li>
+  );
+  return (
+    <article>
+      <h1>fisicos</h1>
+      <ul>{listItems}</ul>
+      <h1>Otros</h1>
+      <ul>{listItemss}</ul>
+    </article>
+  );
+}
+______________________________________________________
+EJERCISIO DONDE UTILICE .MAP() PARA PODER REPARTIR UN ARRAY DE OBJETOS 
+Y TAMBIEN EN ESE ESE MISMO ARRAY DE OBJETOS CONTABA CON UN OBJETO CON UN ARRAY POR LO QUE
+LO TUVE QUE ITERAR POR SEPARADO ACCEDIENDO A SU PROPIEDAD 
+import React from "react";
+export default function RecipeList() {
+  const recipes = [
+    {
+      id: "greek-salad",
+      name: "Greek Salad",
+      ingredients: ["tomatoes", "cucumber", "onion", "olives", "feta"],
+    },
+    {
+      id: "hawaiian-pizza",
+      name: "Hawaiian Pizza",
+      ingredients: [
+        "pizza crust",
+        "pizza sauce",
+        "mozzarella",
+        "ham",
+        "pineapple",
+      ],
+    },
+    {
+      id: "hummus",
+      name: "Hummus",
+      ingredients: [
+        "chickpeas",
+        "olive oil",
+        "garlic cloves",
+        "lemon",
+        "tahini",
+      ],
+    },
+  ];
+
+  const iter = recipes.map((pizzas) => {
+    return (
+      <>
+        <ul>
+          <h1>{pizzas.name}</h1>
+          {pizzas.ingredients.map((ingredientsArray) => (
+            <li>{ingredientsArray}</li>
+          ))}
+          ;
+        </ul>
+      </>
+    );
+  });
+  return (
+    <div>
+      <ul>
+        <h1>Recipes</h1>
+        {iter}
+      </ul>
+    </div>
+  );
+}
